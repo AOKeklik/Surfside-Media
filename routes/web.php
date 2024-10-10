@@ -28,4 +28,14 @@ Route::middleware(["auth"])->group(function ()  {
 
 Route::middleware(["auth", AuthAdmin::class])->group (function () {
     Route::get("/admin", [AdminController::class, "index"])->name("admin.index");
+    Route::get("/admin/brands", [AdminController::class, "brands"])->name("admin.brands");
+    
+    Route::get("/admin/brand/add", [AdminController::class, "add_brand"])->name("admin.brand.add");
+    Route::post("/admin/brand/store", [AdminController::class, "store_brand"])->name("admin.brand.store");
+    Route::get("/admin/brand/edit/{id}", [AdminController::class, "edit_brand"])->name ("admin.brand.edit");
+    Route::put("/admin/brand/update", [AdminController::class, "update_brand"])->name ("admin.brand.update");
+    // Route::delete("/admin/brand/delete", [AdminController::class, "delete_brand"])->name("admin.brand.delete");
+    Route::delete("/admin/brand/{id}/delete", [AdminController::class, "delete_brand"])->name("admin.brand.delete");
+
+    
 });
