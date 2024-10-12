@@ -501,7 +501,6 @@
       </div>
     </header>
     
-
     @yield ("content")
   
     <hr class="mt-5 text-secondary" />

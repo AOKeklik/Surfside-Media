@@ -63,7 +63,7 @@
                                         <span style="color: tomato">No image!</span>
                                     @endif
                                     <div class="name">
-                                        <a href="#" class="body-title-2">{{$brand->naem}}</a>
+                                        <a href="#" class="body-title-2">{{$brand->name}}</a>
                                     </div>
                                 </td>
                                 <td>{{$brand->slug}}</td>
