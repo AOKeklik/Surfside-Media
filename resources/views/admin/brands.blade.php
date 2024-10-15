@@ -80,7 +80,7 @@
                                             @csrf
                                             @method("delete") 
                                             <input type="hidden" name="id" value="{{$brand->id}}">
-                                            <div onclick="handlerDeleteItem(event, '{{$brand->name}}')" class="item text-danger delete">
+                                            <div onclick="handlerDeleteItem(event, '{{addslashes($brand->name)}}')" class="item text-danger delete">
                                                 <i class="icon-trash-2"></i>
                                             </div>
                                         </form>
@@ -106,7 +106,7 @@
     function handlerDeleteItem (e, name) {
         e.preventDefault ()
         const form = e.target.closest("form")
-        if ( confirm( 'Are you sure to delete the brand:'.concat(name, "?") ) ) {
+        if (confirm( 'Are you sure to delete the brand:'+name+"?")) {
             form.submit()
         }
     }

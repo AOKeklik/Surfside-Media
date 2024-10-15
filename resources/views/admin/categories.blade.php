@@ -80,7 +80,7 @@
                                             @csrf
                                             @method("delete")
                                             <input type="hidden" name="id", value="{{$category->id}}">
-                                            <div class="item text-danger delete" onclick="handlerClickDelete(event, '{{$category->id}}')">
+                                            <div class="item text-danger delete" onclick="handlerClickDelete(event, '{{addslashes($category->id)}}')">
                                                 <i class="icon-trash-2"></i>
                                             </div>
                                         </form>
@@ -94,7 +94,7 @@
             </div>
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-
+                {{$categories->links("pagination::bootstrap-5")}}
             </div>
         </div>
     </div>
@@ -111,3 +111,4 @@
     }
 </script>
 @endpush
+

@@ -83,7 +83,7 @@
         function handlerOnChange(e) {
             const val = e.target.value
             const slug = document.querySelector("input[name='slug']")
-            const formatedVal = val.replace(/[^\w ]/g, "").replace(/\s+/g, "-")
+            const formatedVal = val.toLowerCase().replace(/[^\w ]/g, "").replace(/\s+/g, "-")
             slug.value = formatedVal
         }
         function handlerOnChangeUpdateImage (e) {

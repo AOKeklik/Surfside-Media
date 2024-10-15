@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
+
 use Intervention\Image\Laravel\Facades\Image;
 
 class AdminCategoryController {
@@ -29,7 +32,7 @@ class AdminCategoryController {
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
 
-        if ($request->file("image")) {
+        if ($request->hasFile("image")) {
             $image = $request->file("image");
             $file_extension = $request->file("image")->extension();
             $file_name = Carbon::now()->timestamp.".".$file_extension;

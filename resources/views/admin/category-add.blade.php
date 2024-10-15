@@ -31,7 +31,7 @@
         <div class="wg-box">
             <form class="form-new-product form-style-1" action="{{route('admin.category.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method("post")
+                @method("POST")
                 <fieldset class="name">
                     <div class="body-title">Category Name <span class="tf-color-1">*</span> </div>
                     <input class="flex-grow" onchange="handlerOnChange(event)" type="text" placeholder="Category name" name="name" tabindex="0" value="{{old('name')}}" aria-required="true" required="">
@@ -76,7 +76,12 @@
         function handlerOnChange(e) {
             const val = e.target.value
             const slug = document.querySelector("input[name='slug']")
-            const formatedVal = val.replace(/[^\w ]/g, "").replace(/\s+/g, "-")
+            const formatedVal = val
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w ]/g, "")
+                .replace(/\s+/g, "-")
+
             slug.value = formatedVal
         }
         function handlerOnChangeUpdateImage (e) {
@@ -94,3 +99,8 @@
         }
     </script>
 @endpush
+
+
+
+
+

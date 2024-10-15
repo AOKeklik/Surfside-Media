@@ -67,12 +67,12 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
-                                            <a href="add-product.html" class="">
+                                            <a href="{{route('admin.product.add')}}" class="">
                                                 <div class="text">Add Product</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
-                                            <a href="products.html" class="">
+                                            <a href="{{route('admin.products')}}" class="">
                                                 <div class="text">Products</div>
                                             </a>
                                         </li>
@@ -178,7 +178,7 @@
                     <div class="header-dashboard">
                         <div class="wrap">
                             <div class="header-left">
-                                <a href="index-2.html">
+                                <a href="{{route('admin.index')}}">
                                     <img class="" id="logo_header_mobile" alt="" src="{{asset('images/logo/logo.png')}}"
                                         data-light="{{asset('images/logo/logo.png')}}" data-dark="{{asset('images/logo/logo.png')}}"
                                         data-width="154px" data-height="52px" data-retina="{{asset('images/logo/logo.png')}}">
