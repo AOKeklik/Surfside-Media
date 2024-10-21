@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\File;
 
 use Intervention\Image\Laravel\Facades\Image;
 
-class AdminProductsController {
+class AdminProductController {
     public function products () {
         $products = Product::orderBy("created_at", "DESC")->paginate(10);
         return view ("admin.products", compact("products"));
@@ -75,10 +75,11 @@ class AdminProductsController {
                 $image = Image::read($path);
                 
                 $image->cover (540, 689, "top");
-                
                 $image->resize (540, 689, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save ($destinationPath."/".$newFileName);
+
+                $image->cover(104,104,"top");
                 $image->resize (104,104, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save ($destinationPathThumbnail."/".$newFileName);

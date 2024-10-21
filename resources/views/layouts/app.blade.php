@@ -275,11 +275,13 @@
           </a>
         </div>
   
-        <a href="#" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
+        <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart js-open-aside" data-aside="cartDrawer">
           <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_cart" />
           </svg>
-          <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
+          @if (Cart::instance("cart")->content()->count() > 0)
+            <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance("cart")->content()->count()}}</span>
+          @endif
         </a>
       </div>
   
@@ -312,10 +314,10 @@
                 <a href="{{route('home.index')}}" class="navigation__link">Home</a>
               </li>
               <li class="navigation__item">
-                <a href="shop.html" class="navigation__link">Shop</a>
+                <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
               </li>
               <li class="navigation__item">
-                <a href="cart.html" class="navigation__link">Cart</a>
+                <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
               </li>
               <li class="navigation__item">
                 <a href="about.html" class="navigation__link">About</a>
@@ -401,10 +403,10 @@
                 <a href="{{route('home.index')}}" class="navigation__link">Home</a>
               </li>
               <li class="navigation__item">
-                <a href="shop.html" class="navigation__link">Shop</a>
+                <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
               </li>
               <li class="navigation__item">
-                <a href="cart.html" class="navigation__link">Cart</a>
+                <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
               </li>
               <li class="navigation__item">
                 <a href="about.html" class="navigation__link">About</a>
@@ -489,12 +491,14 @@
               </svg>
             </a>
   
-            <a href="cart.html" class="header-tools__item header-tools__cart">
-              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_cart" />
-              </svg>
-              <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
+            <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart">
+                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <use href="#icon_cart" />
+                </svg>
+                @if (Cart::instance('cart')->content()->count() > 0)
+                    <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
+                @endif
             </a>
           </div>
         </div>
@@ -580,7 +584,7 @@
               <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a></li>
               <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
               <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
-              <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a></li>
+              <li class="sub-menu__item"><a href="{{route('shop.index')}}" class="menu-link menu-link_us-s">Shop All</a></li>
             </ul>
           </div>
   
