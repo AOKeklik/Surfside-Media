@@ -392,12 +392,27 @@
                                     <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
                                 </div>
 
-                                <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
-                                    title="Add To Wishlist">
-                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                    </svg>
-                                </button>
+                                @if (Cart::instance("wishlist")->content()->where("id", $product->id)->count() > 0)
+                                    <form action="{{route('wishlist.delete.item', ['rowId' => Cart::instance("wishlist")->content()->where("id", $product->id)->first()->rowId])}}" method="POST">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button onclick="event.target.closest('form').submit()" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#9c7539" d="M12.001 4.529a6 6 0 0 1 8.242.228a6 6 0 0 1 .236 8.236l-8.48 8.492l-8.478-8.492a6 6 0 0 1 8.48-8.464"/></svg>
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{route('wishlist.add')}}" method="post">
+                                        @csrf
+                                        @method("POST")
+                                        <input type="hidden" name="id" value="{{$product->id}}">
+                                        <input type="hidden" name="name" value="{{$product->name}}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="price" value="{{$product->sale_price ? $product->sale_price : $product->regular_parice}}">
+                                        <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Add To Wishlist">
+                                            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>

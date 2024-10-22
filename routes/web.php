@@ -8,6 +8,7 @@ use App\Http\Controllers\CartConteller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,15 +29,23 @@ Auth::routes();
 /* WEBSITE */
 Route::get ("/", [HomeController::class, "index"])->name("home.index");
 
+/* shop */
 Route::get("/shop", [ShopController::class, "products"])->name("shop.index");
 Route::get("/shop/{slug}", [ShopController::class, "details"])->name("shop.product");
-
+/* cart */
 Route::get("/cart", [CartConteller::class, "index"])->name("cart.index");
 Route::post("/cart/add", [CartConteller::class, "add_to_cart"])->name("cart.add");
 Route::put("/cart/increase-quantity/{rowId}", [CartConteller::class, "increase_cart_quantity"])->name("cart.increase.quantity");
 Route::put("/cart/decrease-quantity/{rowId}", [CartConteller::class, "decrease_cart_quantity"])->name("cart.decrease.quantity");
 Route::get("/cart/delete-item/{rowId}", [CartConteller::class, "delete_cart_item"])->name("cart.delete.item");
 Route::delete("/cart/delete", [CartConteller::class, "delete_cart"])->name("cart.delete");
+/* wishlist */
+Route::get("/wishlist", [WishlistController::class, "index"])->name("wishlist.index");
+Route::post("/wishlist/add", [WishlistController::class, "add_to_wishlist"])->name("wishlist.add");
+Route::delete("/wishlist/delete/{rowId}", [WishlistController::class, "remove_wishlist_item"])->name("wishlist.delete.item");
+Route::delete("/wishlist/delete", [WishlistController::class, "remove_wishlist"])->name("wishlist.delete");
+Route::get("/wishlist/move-to-cart/{rowId}", [WishlistController::class, "move_to_cart"])->name("wishlist.move.to.cart");
+
 
 
 
