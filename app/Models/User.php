@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Order;
+use App\Models\Address;
 
 class User extends Authenticatable
 {
@@ -43,4 +45,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function order () {
+        return $this->hasMany(Order::class);
+    }
+
+    public function address () {
+        return $this->hasMany(Address::class);
+    }
 }

@@ -44,11 +44,18 @@ class CouponController extends Controller
             $totalAfterDiscount = $subtotalAfterDiscount + $taxAfterDiscount;
 
             Session::put("discounts", [
-                "discount" => number_format(floatval($discount),2,".",""),
-                "subtotal" => number_format(floatval($subtotalAfterDiscount), 2, ",", ""),
-                "tax" => number_format(floatval($taxAfterDiscount), 2, ",", ""),
-                "total" => number_format(floatval($totalAfterDiscount), 2, ",", "")
+                "discount" => $discount,
+                "subtotal" => $subtotalAfterDiscount,
+                "tax" => $taxAfterDiscount,
+                "total" => $totalAfterDiscount,
             ]);
+
+            // Session::put("discounts", [
+            //     "discount" => number_format(floatval($discount),2,".",""),
+            //     "subtotal" => number_format(floatval($subtotalAfterDiscount), 2, ".", ""),
+            //     "tax" => number_format(floatval($taxAfterDiscount), 2, ".", ""),
+            //     "total" => number_format(floatval($totalAfterDiscount), 2, ".", "")
+            // ]);
         }
         
         return redirect()->back()->with("success", "Coupon has been applied!");

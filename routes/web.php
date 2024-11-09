@@ -4,8 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminBrandController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminCouponController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\CartConteller;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
@@ -34,6 +36,7 @@ Route::get ("/", [HomeController::class, "index"])->name("home.index");
 /* shop */
 Route::get("/shop", [ShopController::class, "products"])->name("shop.index");
 Route::get("/shop/{slug}", [ShopController::class, "details"])->name("shop.product");
+
 /* cart */
 Route::get("/cart", [CartConteller::class, "index"])->name("cart.index");
 Route::post("/cart/add", [CartConteller::class, "add_to_cart"])->name("cart.add");
@@ -43,6 +46,12 @@ Route::get("/cart/delete-item/{rowId}", [CartConteller::class, "delete_cart_item
 Route::delete("/cart/delete", [CartConteller::class, "delete_cart"])->name("cart.delete");
 Route::post("/cart/apply-coupon", [CouponController::class, "apply_cupon_code"])->name("cart.coupon.apply");
 Route::delete("/cart/remove-coupon", [CouponController::class, "remove_coupon_code"])->name("cart.coupon.remove");
+
+/* checkout */
+Route::get("/checkout", [CheckoutController::class, "checkout"])->name("cart.checkout");
+Route::post("/place-an-order", [CheckoutController::class, "place_an_order"])->name("cart.place.an.order");
+Route::get("/order-confirmation", [CheckoutController::class, "order_confirmation"])->name("cart.order.confirmation");
+
 /* wishlist */
 Route::get("/wishlist", [WishlistController::class, "index"])->name("wishlist.index");
 Route::post("/wishlist/add", [WishlistController::class, "add_to_wishlist"])->name("wishlist.add");
@@ -55,7 +64,10 @@ Route::get("/wishlist/move-to-cart/{rowId}", [WishlistController::class, "move_t
 
 /* USER */
 Route::middleware(["auth"])->group(function ()  {
-    Route::get("account-dashboard", [UserController::class, 'index'])->name("user.index");
+    Route::get("/account-dashboard", [UserController::class, 'index'])->name("user.index");
+    Route::get("/account-orders", [UserController::class, "orders"])->name("user.orders");
+    Route::get("/account-order/{order_id}", [UserController::class, "order"])->name("user.order.detail");
+    Route::put("/acoount-canceled", [UserController::class, "canceled_oder"])->name("user.order.canceled");
 });
 
 
@@ -96,4 +108,9 @@ Route::middleware(["auth", AuthAdmin::class])->group (function () {
     Route::get("/admin/coupon/edit/{id}", [AdminCouponController::class, "edit_coupon"])->name("admin.coupon.edit");
     Route::put("/admin/coupon/update", [AdminCouponController::class, "update_coupon"])->name("admin.coupon.update");
     Route::delete("/admin/coupon/delete", [AdminCouponController::class, "delete_coupon"])->name("admin.coupon.delete");
+
+/* ORDERS */
+    Route::get("/admin/orders", [AdminOrderController::class, "orders"])->name("admin.orders");
+    Route::get("/admin/order/detail/{order_id}", [AdminOrderController::class, "order"])->name("admin.order.detail");
+    Route::put("/admin/order/update-status", [AdminOrderController::class, "update_status_order"])->name("admin.order.uptdate.status");
 });

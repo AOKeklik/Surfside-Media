@@ -30,14 +30,25 @@ class AdminBrandController extends Controller
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->name);
 
-        if ($request->file("image")) {
-            $image = $request->file("image");
-            $file_extention = $request->file("image")->extension();
-            $file_name = Carbon::now()->timestamp.".".$file_extention;
+        if ($request->hasFile("image")) {
+            $destinationPath = public_path("uploads/brands");
 
-            $this->GenerateBrandThumbnailsImage ($image, $file_name);
+            if (!File::exists($destinationPath))
+                mkdir($destinationPath, 0755, true);
 
-            $brand->image = $file_name;
+
+            $filePath = $request->file("image")->path();
+            $fileExtention = $request->file("image")->extension();
+            $fileName = Carbon::now()->timestamp.".".$fileExtention;
+
+            $img = Image::read($filePath);
+            $img->cover(124,124,"center");
+            $img->resize(124,124,function ($constraint) {
+                $constraint->aspectRotio();
+            })->save($destinationPath."/".$fileName);
+
+
+            $brand->image = $fileName;
         }
 
         $brand->save();

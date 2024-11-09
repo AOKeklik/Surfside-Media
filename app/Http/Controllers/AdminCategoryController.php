@@ -71,7 +71,7 @@ class AdminCategoryController {
             $extention = $request->file("image")->extension();
             $newImageName = Carbon::now()->timestamp.".".$extention;
             
-            if (!is_dir ($destinationPath) && !file_exists($destinationPath))
+            if (!File::exists($destinationPath))
                 mkdir ($destinationPath, 0755, true);
 
             $img = Image::read($image->path());
