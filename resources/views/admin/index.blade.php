@@ -1,14 +1,10 @@
 @extends ("layouts.admin")
-
 @section ("content")
-
 <div class="main-content-inner">
-
     <div class="main-content-wrap">
         <div class="tf-section-2 mb-30">
             <div class="flex gap20 flex-wrap-mobile">
                 <div class="w-half">
-
                     <div class="wg-chart-default mb-20">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -22,8 +18,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="wg-chart-default mb-20">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -37,8 +31,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="wg-chart-default mb-20">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -52,8 +44,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="wg-chart-default">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -67,11 +57,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="w-half">
-
                     <div class="wg-chart-default mb-20">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -85,8 +72,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="wg-chart-default mb-20">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -100,8 +85,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="wg-chart-default mb-20">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -115,8 +98,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="wg-chart-default">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap14">
@@ -130,11 +111,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
             <div class="wg-box">
                 <div class="flex items-center justify-between">
                     <h5>Earnings revenue</h5>
@@ -188,15 +166,13 @@
                 </div>
                 <div id="line-chart-8"></div>
             </div>
-
         </div>
         <div class="tf-section mb-30">
-
             <div class="wg-box">
                 <div class="flex items-center justify-between">
                     <h5>Recent orders</h5>
                     <div class="dropdown default">
-                        <a class="btn btn-secondary dropdown-toggle" href="#">
+                        <a class="btn btn-secondary dropdown-toggle" href="{{route("admin.orders")}}">
                             <span class="view-all">View all</span>
                         </a>
                     </div>
@@ -212,7 +188,6 @@
                                     <th class="text-center">Subtotal</th>
                                     <th class="text-center">Tax</th>
                                     <th class="text-center">Total</th>
-
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Order Date</th>
                                     <th class="text-center">Total Items</th>
@@ -221,38 +196,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">Divyansh Kumar</td>
-                                    <td class="text-center">1234567891</td>
-                                    <td class="text-center">$172.00</td>
-                                    <td class="text-center">$36.12</td>
-                                    <td class="text-center">$208.12</td>
-
-                                    <td class="text-center">ordered</td>
-                                    <td class="text-center">2024-07-11 00:54:14</td>
-                                    <td class="text-center">2</td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <a href="#">
-                                            <div class="list-icon-function view-icon">
-                                                <div class="item eye">
-                                                    <i class="icon-eye"></i>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td class="text-center">{{$order->id}}</td>
+                                        <td class="text-center">{{$order->name}}</td>
+                                        <td class="text-center">{{$order->phone}}</td>
+                                        <td class="text-center">${{$order->subtotal}}</td>
+                                        <td class="text-center">${{$order->tax}}</td>
+                                        <td class="text-center">${{$order->total}}</td>
+                                        <td class="text-center">
+                                            @if ($order->status === "delivered")
+                                                <span class="badge bg-success">Delivered</span>
+                                            @elseif ($order->status === "canceled")
+                                                <span class="badge bg-danger">Canceled</span>
+                                            @else
+                                                <span class="badge bg-danger">Ordered</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{$order->id}}</td>
+                                        <td class="text-center">{{$order->id}}</td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <a href="{{route("admin.order.detail", ["order_id" => $order->id])}}">
+                                                <div class="list-icon-function view-icon">
+                                                    <div class="item eye"><i class="icon-eye"></i></div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    </td>
-                                </tr>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
-
-
 @endsection

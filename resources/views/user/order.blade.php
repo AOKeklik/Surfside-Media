@@ -294,7 +294,7 @@
 
         swal ({
             title: "Are yout sure?",
-            text: "You want to caanceled this order?",
+            text: "You want to canceled this order?",
             type: "warning",
             buttons: ["yes", "no"],
             confirmButtonColor: "#dc3545"

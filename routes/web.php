@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\CartConteller;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CouponController;
@@ -60,8 +61,6 @@ Route::delete("/wishlist/delete", [WishlistController::class, "remove_wishlist"]
 Route::get("/wishlist/move-to-cart/{rowId}", [WishlistController::class, "move_to_cart"])->name("wishlist.move.to.cart");
 
 
-
-
 /* USER */
 Route::middleware(["auth"])->group(function ()  {
     Route::get("/account-dashboard", [UserController::class, 'index'])->name("user.index");
@@ -113,4 +112,12 @@ Route::middleware(["auth", AuthAdmin::class])->group (function () {
     Route::get("/admin/orders", [AdminOrderController::class, "orders"])->name("admin.orders");
     Route::get("/admin/order/detail/{order_id}", [AdminOrderController::class, "order"])->name("admin.order.detail");
     Route::put("/admin/order/update-status", [AdminOrderController::class, "update_status_order"])->name("admin.order.uptdate.status");
+
+/* SLIDER */
+    Route::get("/admin/slides", [AdminSliderController::class, "slides"])->name("admin.slides");
+    Route::get("/admin/slide/add", [AdminSliderController::class, "add_slide"])->name("admin.slide.add");
+    Route::post("/admin/slide/store", [AdminSliderController::class, "store_slide"])->name("admin.slide.store");
+    Route::get("/admin/slide/edit/{slide_id}", [AdminSliderController::class, "edit_slide"])->name("admin.slide.edit");
+    Route::put("/admin/slide/update", [AdminSliderController::class, "update_slide"])->name("admin.slide.update");
+    Route::delete("/admin/slide/delete", [AdminSliderController::class, "delete_slide"])->name("admin.slide.delete");
 });
