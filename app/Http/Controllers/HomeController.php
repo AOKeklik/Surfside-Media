@@ -21,4 +21,10 @@ class HomeController extends Controller
 
         return view('index', compact("slides", "categories", "products", "fProducts"));
     }
+
+    public function search (Request $request) {
+        $query = $request->input("query");
+        $results = Product::where("name", "like", "%{$query}%")->get()->take(8);
+        return response()->json($results);
+    }
 }

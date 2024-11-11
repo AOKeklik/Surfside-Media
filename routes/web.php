@@ -36,6 +36,9 @@ Auth::routes();
 /* WEBSITE */
 Route::get ("/", [HomeController::class, "index"])->name("home.index");
 
+/* search */
+Route::get("/search", [HomeController::class, "search"])->name("home.search");
+
 /* contact */
 Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
 Route::post("/contact/add/comment", [ContactController::class, "store_contact"])->name("contact.add.comment");
@@ -130,4 +133,7 @@ Route::middleware(["auth", AuthAdmin::class])->group (function () {
 /* CONTACT */
     Route::get("/admin/contacts", [AdminContactController::class, "contacts"])->name("admin.contacts");
     Route::delete("/admin/contact/delete", [AdminContactController::class, "delete_contact"])->name("admin.contact.delete");
+
+/* SEARCH */
+    Route::get("/admin/search", [AdminController::class, "search"])->name("admin.search");
 });

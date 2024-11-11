@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -67,5 +69,12 @@ class AdminController {
             "totalDeliveredAmount",
             "totalCanceledAmount"
         ));
+    }
+
+    public function search (Request $request) {
+        $query = $request->input("query");
+        $results = Product::where("name", "like", "%{$query}%")->get()->take(8);
+
+        return response()->json($results);
     }
 }

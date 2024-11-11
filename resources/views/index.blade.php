@@ -268,5 +268,4 @@
     <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
 </main>
-
 @endsection
