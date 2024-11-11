@@ -3,12 +3,14 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminBrandController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminSliderController;
 use App\Http\Controllers\CartConteller;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
@@ -33,6 +35,10 @@ Auth::routes();
 
 /* WEBSITE */
 Route::get ("/", [HomeController::class, "index"])->name("home.index");
+
+/* contact */
+Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
+Route::post("/contact/add/comment", [ContactController::class, "store_contact"])->name("contact.add.comment");
 
 /* shop */
 Route::get("/shop", [ShopController::class, "products"])->name("shop.index");
@@ -120,4 +126,8 @@ Route::middleware(["auth", AuthAdmin::class])->group (function () {
     Route::get("/admin/slide/edit/{slide_id}", [AdminSliderController::class, "edit_slide"])->name("admin.slide.edit");
     Route::put("/admin/slide/update", [AdminSliderController::class, "update_slide"])->name("admin.slide.update");
     Route::delete("/admin/slide/delete", [AdminSliderController::class, "delete_slide"])->name("admin.slide.delete");
+
+/* CONTACT */
+    Route::get("/admin/contacts", [AdminContactController::class, "contacts"])->name("admin.contacts");
+    Route::delete("/admin/contact/delete", [AdminContactController::class, "delete_contact"])->name("admin.contact.delete");
 });

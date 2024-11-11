@@ -27,7 +27,7 @@ class CheckoutController extends Controller
         if (!$address) {
             $request->validate([
                 "name" => "required|string|max:15",
-                "phone" => "required|regex:/^[0-9]{10}$/|digits:10",
+                "phone" => "required|numeric|regex:/^[0-9]{10}$/|digits:10",
                 "locality" => "required|string",
                 "address" => "required|string",
                 "city" => "required|string",

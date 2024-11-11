@@ -145,7 +145,12 @@
                                         <div class="text">Coupns</div>
                                     </a>
                                 </li>
-
+                                <li class="menu-item">
+                                    <a href="{{route('admin.contacts')}}" class="">
+                                        <div class="icon"><i class="icon-mail"></i></div>
+                                        <div class="text">Mails</div>
+                                    </a>
+                                </li>
                                 <li class="menu-item">
                                     <a href="users.html" class="">
                                         <div class="icon"><i class="icon-user"></i></div>
@@ -414,10 +419,8 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-mail"></i>
-                                                    </div>
+                                                <a href="{{route('admin.contacts')}}" class="user-item">
+                                                    <div class="icon"><i class="icon-mail"></i></div>
                                                     <div class="body-title-2">Inbox</div>
                                                     <div class="number">27</div>
                                                 </a>
